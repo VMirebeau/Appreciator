@@ -16,7 +16,7 @@ def quit():
     exit()
 
 def is_openai_key(key: str) -> bool:
-    pattern = r'^sk-\w+$'
+    pattern = r'^sk-[A-Za-z0-9-_]{32,}$'
     return bool(re.match(pattern, key))
 
 def create_env_file(key: str):
@@ -42,7 +42,7 @@ def load_api_key():
                     print("Votre clé OpenAI semble valide.")
                     return True
                 else:
-                    print("La clé enregistrée semble incorrecte : elle doit être au format \"sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", les \"x\" étant des caractères alphanumériques. Il faut enregistrer une nouvelle clé.")
+                    print("La clé enregistrée semble incorrecte : elle doit être au format \"sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\", les \"x\" étant des caractères alphanumériques (ou un tiret). Il faut enregistrer une nouvelle clé.")
                     return False
         except Exception as e:
             return True
